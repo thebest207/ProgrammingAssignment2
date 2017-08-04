@@ -1,0 +1,66 @@
+## Our aim in this experiment is to write a pair of functions, namely,  
+2 ## "makeCacheMatrix" and "cacheSolve" that cache the inverse of a matrix 
+3  
+4 ## makeCacheMatrix is a function which creates a special "matrix" object that can  
+5 ## cache its inverse for the input (which is an invertible square matrix) 
+6  
+7 makeCacheMatrix <- function(x = matrix()) { 
+8   inv <- NULL 
+9   set <- function(y) { 
+10     x <<- y 
+11     inv <<- NULL 
+12   } 
+13   get <- function() x 
+14   setinv <- function(inverse) inv <<- inverse 
+15   getinv <- function() inv 
+16   list(set = set, get = get, setinv = setinv, getinv = getinv) 
+17 } 
+18  
+19  
+20 ## cacheSolve is a function which computes the inverse of the special "matrix"  
+21 ## returned by makeCacheMatrix above. If the inverse has already been calculated  
+22 ## (and the matrix has not changed), then the cachesolve should retrieve the  
+23 ## inverse from the cache 
+24  
+25 cacheSolve <- function(x, ...) { 
+26         ## Return a matrix that is the inverse of 'x' 
+27   inv <- x$getinv() 
+28   if(!is.null(inv)) { 
+29     message("getting cached result") 
+30     return(inv) 
+31   } 
+32   data <- x$get() 
+33   inv <- solve(data, ...) 
+34   x$setinv(inv) 
+35   inv 
+36 } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
